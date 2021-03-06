@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+
+  web:
+
+    volumes:
+
+      - static:/usr/src/app
+
+    build: ./app
+
+    ports:
+
+      - "8000:8000"
+
+  nginx:
+
+    build:
+       context: ./app
+       dockerfile: Dockerfile.ng
+
+    volumes:
+
+      - static:/usr/src/app
+
+    ports:
+
+      - "80:80"
+
+    depends_on:
+
+      - web
+
+volumes:
+
+  static:
+
